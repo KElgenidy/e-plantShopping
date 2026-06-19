@@ -1,70 +1,78 @@
-# 🌿 Paradise Nursery - E-Plant Shopping Application
+# 🌿 Paradise Nursery — E-Plant Shopping App
 
-Welcome to **Paradise Nursery**, a beautiful, modern, and highly responsive React web application designed for plant lovers! Shop for your favorite house plants with ease and elegance.
+A modern, fully responsive React plant shopping application with Redux state management, polished UI, and a smooth shopping cart experience.
 
-Live Demo: **[https://KElgenidy.github.io/e-plantShopping/](https://KElgenidy.github.io/e-plantShopping/)**
+**🚀 Live Demo:** [https://KElgenidy.github.io/e-plantShopping/](https://KElgenidy.github.io/e-plantShopping/)
 
 ---
 
 ## ✨ Features
 
-- **🌸 Welcome Landing Page**: An elegant landing page introducing the mission and passion of Paradise Nursery with a smooth transition into the store.
-- **🌱 Curated Plant Categories**: Explore diverse, healthy collections categorized for your needs:
-  - *Air Purifying Plants* (Snake Plant, Peace Lily, Spider Plant, etc.)
-  - *Aromatic Fragrant Plants* (Lavender, Rosemary, Jasmine, etc.)
-  - *Insect Repellent Plants* (Marigold, Basil, Catnip, etc.)
-  - *Medicinal Plants* (Aloe Vera, Echinacea, Chamomile, etc.)
-  - *Low Maintenance Plants* (ZZ Plant, Pothos, Succulents, etc.)
-- **🛒 Dynamic Shopping Cart**:
-  - Live item quantity badge on the persistent header.
-  - Interactive "Add to Cart" state which disables and styles the button to "Added to Cart" once selected.
-  - Full controls inside the Cart component to **increment**, **decrement**, or **remove** items completely in real-time.
-  - Automatic unit cost, item subtotal, and grand total calculations.
-- **🎨 Polished UI & Transitions**: Modern, soft card styling, custom-designed pill-shaped SALE badges, forest green thematic price tags, hover lift animations, and clean, responsive layout.
+| Feature | Description |
+|---|---|
+| 🌱 **5 Plant Categories** | Air Purifying, Aromatic, Insect Repellent, Medicinal, Low Maintenance |
+| 🛒 **Dynamic Cart** | Real-time add/remove/increment/decrement with live totals |
+| 🏷️ **Cart Badge** | Live item count badge on the navbar icon |
+| 🎨 **Polished UI** | Smooth hover animations, responsive grid, themed green palette |
+| 📱 **Responsive** | Mobile-first layout that adapts to all screen sizes |
+| ⚡ **Redux Toolkit** | Centralized global state with `addItem`, `removeItem`, `updateQuantity` |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [React](https://react.dev/) (v18)
-- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) & [React Redux](https://react-redux.js.org/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Package Manager**: [Bun](https://bun.sh/)
-- **Deployment**: [GitHub Pages](https://pages.github.com/)
+- **Framework**: React 18
+- **State**: Redux Toolkit + React Redux
+- **Build**: Vite 5
+- **Package Manager**: Bun
+- **Deployment**: GitHub Pages via `gh-pages`
 
 ---
 
-## 🚀 Running Locally
+## 🚀 Getting Started
 
-Follow these steps to run the project in your local development environment:
-
-### 1. Prerequisites
-Ensure you have [Bun](https://bun.sh/) installed:
+### Prerequisites
+Install [Bun](https://bun.sh/):
 ```bash
-bun --version
+curl -fsSL https://bun.sh/install | bash
 ```
 
-### 2. Install Dependencies
-Restore and install all required packages:
+### Install & Run
 ```bash
-bun install
+bun install        # Install dependencies
+bun run dev        # Start dev server at http://localhost:5173/e-plantShopping/
 ```
 
-### 3. Run Development Server
-Start the local server:
+### Build & Deploy
 ```bash
-bun run dev
-```
-Open **`http://localhost:5173/e-plantShopping/`** in your browser to view the app!
-
-### 4. Build and Compile
-Generate the highly optimized production build:
-```bash
-bun run build
+bun run build      # Build production bundle
+bun run deploy     # Deploy to GitHub Pages
 ```
 
-### 5. Deploy to GitHub Pages
-To publish updates to GitHub Pages:
-```bash
-bun run deploy
+---
+
+## 📁 Project Structure
+
 ```
+src/
+├── App.jsx          # Root layout with landing page + product list toggle
+├── App.css          # Landing page & container styles
+├── ProductList.jsx  # Plant catalog grid with Add-to-Cart logic
+├── ProductList.css  # Product card & navbar styles
+├── CartItem.jsx     # Cart component with quantity & totals
+├── CartItem.css     # Cart component styles
+├── CartSlice.jsx    # Redux slice (addItem, removeItem, updateQuantity)
+├── store.js         # Redux store configuration
+├── AboutUs.jsx      # About section
+└── AboutUs.css      # About section styles
+```
+
+---
+
+## 🧠 Implementation Notes
+
+- **`addItem`** — adds a new item or increments quantity if already in cart
+- **`removeItem`** — deletes item from cart entirely
+- **`updateQuantity`** — sets the exact quantity for an item (used by increment/decrement buttons)
+- Cart buttons (+ and −) in `CartItem.jsx` dispatch `updateQuantity`, not `addItem`
+- The `useEffect` in `ProductList.jsx` syncs Redux cart state with the local `addedToCart` map so buttons stay disabled if an item is removed from cart and re-added
